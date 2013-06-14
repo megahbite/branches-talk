@@ -1,0 +1,128 @@
+!!!
+%html{:lang=> "en"}
+  %head
+    %meta{:charset => "utf-8"}
+
+    %title Using version control branching to create a useful workflow
+
+    %meta{:name => "description", :content => "Using version control branching to create a useful workflow"}
+    %meta{:name => "author", :content => "Megan Bowra-Dean <megan@rabidtech.co.nz>"}
+
+    %meta{:name => "apple-mobile-web-app-capable", :content => "yes"}
+    %meta{:name => "apple-mobile-web-app-status-bar-style", :content => "black-translucent"}
+
+    %meta{:name => "viewport", :content => "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"}
+
+    %link{:rel => "stylesheet", :href => "css/reveal.min.css"}
+    %link#theme{:rel => "stylesheet", :href => "css/theme/sky.css"}
+
+    / For syntax highlighting
+    %link{:rel => "stylesheet", :href => "lib/css/zenburn.css"}
+
+    / If the query includes 'print-pdf', use the PDF print sheet
+    :javascript
+      document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+
+    /[if lt IE 9]
+      %script{:src => "lib/js/html5shiv.js"}
+
+  %body
+
+    .reveal
+
+      / Any section element inside of this container is displayed as a slide
+      .slides
+
+        %section
+          %h1 Branches
+          %h3 Using branches in Git to improve workflow
+          %p
+            %small 
+              %a{:href => "http://megan.geek.nz"} Megan Bowra-Dean
+              = "/" 
+              %a{:href => "http://twitter.com/megahbite"} @megahbite
+              %br
+              Software Developer at
+              %a{:href => "http://www.rabid.co.nz"} Rabid Tech
+
+        %section
+          %h2 Git vs Other DVCS
+          %p
+            Why do we use Git over Mercurial or Bazzar?
+
+        %section
+          %h2 Git is not user friendly
+          %p Even by command line tool standards Git fails at consistency
+          %pre
+            :preserve
+              git branch -D &lt;branch_name&gt;
+              git remote remove &lt;remote_name&gt;
+
+        %section
+          %h2 However Git is really awesome and fast for branching code
+          %p 
+            This is probably Git's main advantage over other DVCSs but it is underutilised.
+            Using Git's powerful and fast branching capabilities we can create robust workflows
+
+        %section
+          %h2 What does a robust branch based workflow look like?
+
+        %section
+          %p
+            The seminal work on this is probably Vincent Driessen's "A successful Git branching model"
+            %a{:href => "http://nvie.com/posts/a-successful-git-branching-model/"} http://nvie.com/posts/a-successful-git-branching-model/
+
+        %section#workflow-diagram
+          %img{:src => "img/gitworkflow.png"}
+
+        %section
+          %h2 Over engineered?
+          %p
+            This workflow is suitable for large open source projects with many contributors but is probably too complex for a small agile company like Rabid.
+
+        %section
+          %h2 How we've adapted this workflow for the project NZ Navigator
+
+        %section
+          %ul
+            %li Kept the core master and develop branches on Bitbucket
+            %li.fragment Create hotfix branches as they're needed.
+            %li.fragment Removed the release branches
+            %li.fragment Feature branches are kept in local repositories only
+          %a{:href => "#/workflow-diagram"} Diagram
+
+        %section
+          %p
+            Streamlining the workflow allows us to keep rapid agile development while maintaining structure and accountability.
+
+        %section
+          %h2 THE END
+
+    %script{:src => "lib/js/head.min.js"}
+    %script{:src => "js/reveal.min.js"}
+
+    :javascript
+
+      // Full list of configuration options available here:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+
+        theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+        transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+        // Optional libraries used to extend on reveal.js
+        dependencies: [
+          { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+          { src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+          { src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+          // { src: 'plugin/search/search.js', async: true, condition: function() { return !!document.body.classList; } }
+          // { src: 'plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
+        ]
+      });

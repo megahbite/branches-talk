@@ -1,0 +1,1 @@
+A talk on using Git to create branch based workflows using [reveal.js](https://github.com/hakimel/reveal.js)
